@@ -1,0 +1,36 @@
+---
+layout: default
+---
+
+<div class="jumbotron">
+  <h1 class="display-3">
+    {{ site.title }}
+  </h1>
+  {% if site.description != none %}
+    <p class="lead">
+      {{ site.description }}
+    </p>
+  {% endif %}
+  {% if site.long_description != none %}
+    <hr class="my-4">
+    <p>
+      {{ site.long_description }}
+    </p>
+  {% endif %}
+
+  {% assign navigation = site.navigation | where_exp: 'link', 'link.show_on_start' %}
+  {% if navigation.size > 0 %}
+    <p class="lead">
+    {% for link in navigation %}
+      <a class="btn btn-primary btn-lg" href="{{ site.url }}{{ link.relative_url }}" role="button">
+        {% if link.show_on_start == true %}
+          {{ link.title }}
+        {% else %}
+          {{ link.show_on_start }}
+        {% endif %}
+      </a>
+    {% endfor %}
+    </p>
+  {% endif %}
+
+</div>

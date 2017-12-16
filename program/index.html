@@ -1,0 +1,148 @@
+---
+layout: default
+title: Programm
+---
+{% assign first_talk = site.talks | sort: 'date_start' | first %}
+{% assign start_date = first_talk.date_start %}
+{% assign start_hour = start_date | date: "%H" %}
+{% assign start_min = start_date | date: "%M" | divided_by: site.time_steps | floor | times: site.time_steps %}
+
+{% assign last_talk = site.talks | sort: 'date_end' | last %}
+{% assign end_date = last_talk.date_end %}
+{% assign end_hour = end_date | date: "%H" %}
+{% assign end_min = end_date | date: "%M" | divided_by: site.time_steps | ceil | times: site.time_steps %}
+{% if end_min >= 60 %}
+  {% assign end_hour = end_hour | plus: 1 %}
+  {% assign end_min = end_min | minus: 60 %}
+{% endif %}
+
+{% assign total_duration_min = end_hour | minus: start_hour | times: 60 | minus: start_min | plus: end_min %}
+{% assign nbr_steps = total_duration_min | divided_by: site.time_steps %}
+
+  <h1>{{ page.title }}</h1>
+
+  <p>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          {% assign nbr_rooms = site.location | size %}
+          {% for room in site.location %}
+            <th scope="col" style="width: {{ 100 | divided_by: nbr_rooms }}%">
+              <a href="{{ room.url }}">
+                {{ room.name }}
+              </a>
+            </th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% assign categories = site.talks | map: 'category' | uniq | sort %}
+
+        {% for i in (1..nbr_steps) %}
+          {% assign current_hour = i | minus: 1 | times: site.time_steps | plus: start_min | divided_by: 60 | floor | plus: start_hour | modulo: 24  %}
+          {% assign current_min = i | minus: 1 | times: site.time_steps | plus: start_min | modulo: 60 %}
+
+          <tr>
+            <th scope="row">
+              {% if current_min == 0 %}
+                {{ current_hour }}:00
+              {% endif %}
+            </th>
+            {% for room in site.location %}
+              {% assign active_talk = 0 %}
+
+              {% assign talks = site.talks | where: 'room', room.name | sort: 'date_start' %}
+              {% for talk in talks %}
+
+                {% assign talk_start_hour = talk.date_start | date: "%H" %}
+                {% assign talk_start_min = talk.date_start | date: "%M" | divided_by: site.time_steps | floor | times: site.time_steps %}
+                {% assign talk_end_hour = talk.date_end | date: "%H" %}
+                {% assign talk_end_min = talk.date_end | date: "%M" | divided_by: site.time_steps | ceil | times: site.time_steps %}
+
+                {% assign d_start_hour = current_hour | minus: talk_start_hour %}
+                {% assign d_start_min = current_min | minus: talk_start_min %}
+                {% assign d_end_hour = current_hour | minus: talk_end_hour %}
+                {% assign d_end_min = current_min | minus: talk_end_min %}
+                {% if d_start_hour == 0 %}
+                  {% if d_start_min == 0 %}
+
+                    {% assign talk_duration_min = talk_end_hour | minus: talk_start_hour | times: 60 | minus: talk_start_min | plus: talk_end_min %}
+                    {% assign talk_nbr_steps = talk_duration_min | divided_by: site.time_steps %}
+
+                    {% assign category_id = 0 %} <!-- default color -->
+                    {% for category in categories %}
+                      {% if category == talk.category %}
+                        {% assign category_id = forloop.index %}
+                        {% break %}
+                      {% endif %}
+                    {% endfor %}
+                    <td rowspan="{{ talk_nbr_steps }}" class="talk" style="background-color: {{ site.category_colors[category_id] }};">
+                      <strong>
+                        <a href="{{ site.url }}{{ talk.url }}">
+                          {{ talk.name }}
+                        </a>
+                      </strong> <br />
+                      <em>
+                        {% for speaker_name in talk.speakers %}
+                          {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
+                          {% assign names = speaker.name | split: ', ' %}
+                          <a href="{{ site.url }}{{ speaker.url }}">
+                            {{ names | last | slice: 0 }}. {{ names | first }}</a><!--
+                            {% if forloop.last != true %}
+                              -->,
+                            {% else %}
+                              -->
+                            {% endif %}
+                        {% endfor %}
+                      </em>
+                    </td>
+                    {% assign active_talk = 1 %}
+
+                  {% endif %}
+                {% endif %}
+
+                {% assign has_started = 0 %}
+                {% if d_start_hour == 0 and d_start_min > 0 %}
+                  {% assign has_started = 1 %}
+                {% endif %}
+                {% if d_start_hour > 0 %}
+                  {% assign has_started = 1 %}
+                {% endif %}
+
+                {% assign has_ended = 0 %}
+                {% if d_end_hour == 0 and d_end_min >= 0 %}
+                  {% assign has_ended = 1 %}
+                {% endif %}
+                {% if d_end_hour > 0 %}
+                  {% assign has_ended = 1 %}
+                {% endif %}
+
+                {% if has_started == 1 and has_ended == 0 %}
+                  {% assign active_talk = 1 %}
+                {% endif %}
+
+              {% endfor %}
+
+              {% if active_talk == 0 %}
+                <td></td>
+              {% endif %}
+
+            {% endfor %}
+
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </p>
+
+  {% if categories.size > 0 %}
+    &nbsp;
+    <h5>Legende</h5>
+    <p>
+      {% for category in categories %}
+        <span class="badge" style="background-color: {{ site.category_colors[forloop.index] }};">{{ category }}</span>
+      {% endfor %}
+    </p>
+  {% endif %}
+

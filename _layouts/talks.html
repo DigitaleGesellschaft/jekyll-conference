@@ -1,0 +1,61 @@
+{% include header.html %}
+
+  {% assign talk = page %}
+
+  {% assign categories = site.talks | map: 'category' | uniq | sort %}
+  {% assign category_id = 0 %} <!-- default color -->
+  {% for category in categories %}
+    {% if category == talk.category %}
+      {% assign category_id = forloop.index %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+  <h5>
+    <span class="badge" style="background-color: {{ site.category_colors[category_id] }};">{{ talk.category }}</span>
+  </h5>
+
+  <h1>Vortrag: {{ talk.name }}</h1>
+
+  <p>
+    <em>
+      {% for speaker_name in talk.speakers %}
+        {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
+        {% assign names = speaker.name | split: ', ' %}
+        <a href="{{ site.url }}{{ speaker.url }}">
+          {{ names | last | slice: 0 }}. {{ names | first }}</a><!--
+          {% if forloop.last != true %}
+            -->,
+          {% else %}
+            -->
+          {% endif %}
+      {% endfor %}
+    </em>
+  </p>
+
+  {% assign talk_start_hour = talk.date_start | date: "%H" %}
+  {% assign talk_start_min = talk.date_start | date: "%M" | divided_by: site.time_steps | floor | times: site.time_steps %}
+  {% assign talk_end_hour = talk.date_end | date: "%H" %}
+  {% assign talk_end_min = talk.date_end | date: "%M" | divided_by: site.time_steps | ceil | times: site.time_steps %}
+
+  {% assign talk_duration_min = talk_end_hour | minus: talk_start_hour | times: 60 | minus: talk_start_min | plus: talk_end_min %}
+
+  {% assign room = site.location | where: 'name', talk.room | first %}
+  <p>
+    Beginn um <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a> Uhr
+
+    in <a href="{{ site.url }}{{ room.url }}" class="badge badge-light">{{ room.name }}</a>,
+
+    Dauer: <span class="badge badge-light">{{ talk_duration_min }}min</span>
+  </p>
+
+  {{ content }}
+
+  &nbsp;
+  <p>
+    <a href="{{ site.url }}{% link talks/index.html %}">zurück zur Übersicht</a>
+  </p>
+  <p>
+    <a href="{{ site.url }}{% link program/index.html %}">zurück zum Program</a>
+  </p>
+
+{% include footer.html %}

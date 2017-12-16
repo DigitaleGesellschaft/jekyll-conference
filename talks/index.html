@@ -1,0 +1,46 @@
+---
+layout: default
+title: Vorträge
+---
+
+<h1>{{ page.title }}</h1>
+
+{% assign cur_category = blank %}
+{% assign category_id = 0 %}
+{% assign talks = site.talks | sort: 'name' | sort: 'category' %}
+{% for talk in talks %}
+  {% assign category = talk.category %}
+  {% if cur_category != category %}
+    {% if cur_category != blank %}
+        </ul>
+      </p>
+    {% endif %}
+
+    {% assign cur_category = category %}
+    {% assign category_id = category_id | plus: 1 %}
+    <h4><span class="badge" style="background-color: {{ site.category_colors[category_id] }};">{{ category }}</span></h4>
+    <p>
+      <ul>
+  {% endif %}
+
+  <li>
+    <a href="{{ site.url }}{{ talk.url}}">
+      {{ talk.name }}
+    </a>
+
+    von
+    {% for speaker_name in talk.speakers %}
+      {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
+      {% assign names = speaker.name | split: ', ' %}
+      <a href="{{ site.url }}{{ speaker.url }}">
+        {{ names | last | slice: 0 }}. {{ names | first }}</a><!--
+      {% if forloop.last != true %}
+        -->,
+      {% else %}
+        -->
+      {% endif %}
+    {% endfor %}
+  </li>
+{% endfor %}
+</ul>
+</p>

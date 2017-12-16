@@ -1,0 +1,33 @@
+---
+---
+
+// outer border settings
+.table {
+  border: 0px none;
+
+  tr:first-of-type th {
+    border-top: 0px none;
+  }
+  tr th:first-of-type {
+    border-left: 0px none;
+  }
+}
+
+// first column width and alignment
+.table tr th:first-of-type {
+  width: 4rem;
+  text-align: center;
+}
+.table tr:first-of-type th {
+  text-align: center;
+}
+
+// minimum row hight
+tbody tr {
+  height: 3rem;
+}
+
+// talk box styling
+.talk {
+  border-radius: 0.8rem;
+}

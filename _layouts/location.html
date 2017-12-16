@@ -1,0 +1,60 @@
+{% include header.html %}
+
+  {% assign room = page %}
+
+  <h1>Örtlichkeit</h1>
+
+  <p>
+    <ul class="nav nav-pills">
+      <li class="nav-item">
+        <a class="nav-link {% if page.name contains 'index' %}active{% endif %}" href="{{ site.url }}{% link location/index.md %}">Plan</a>
+      </li>
+      {% for r in site.location %}
+        <li class="nav-item">
+          <a class="nav-link {% if room.name == r.name %}active{% endif %}" href="{{ site.url }}{{ r.url }}">{{ r.name }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </p>
+
+  {{ content }}
+
+  {% unless page.name contains 'index' %}
+    &nbsp;
+    <h5>Programm in diesem Raum:</h5>
+    <p>
+      <ul>
+        {% assign talks = site.talks | where: 'room', room.name | sort: 'date_start' %}
+        {% if talks.size > 0 %}
+          {% for talk in talks %}
+
+            {% assign categories = site.talks | map: 'category' | uniq | sort %}
+            {% assign category_id = 0 %} <!-- default color -->
+            {% for category in categories %}
+              {% if category == talk.category %}
+                {% assign category_id = forloop.index %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
+            {% assign talk_start_hour = talk.date_start | date: "%H" %}
+            {% assign talk_start_min = talk.date_start | date: "%M" | divided_by: site.time_steps | floor | times: site.time_steps %}
+
+            <li>
+              <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a>
+              &nbsp;
+              <a href="{{ site.url }}{{ talk.url }}">{{ talk.name }}</a>
+              &nbsp;
+              <span class="badge" style="background-color: {{ site.category_colors[category_id] }};">{{ talk.category }}</span>
+            </li>
+          {% endfor %}
+        {% else %}
+          <li>
+            <em>keine Vorträge geplant</em>
+          </li>
+        {% endif %}
+      </ul>
+    </p>
+    {% endunless %}
+
+{% include footer.html %}
