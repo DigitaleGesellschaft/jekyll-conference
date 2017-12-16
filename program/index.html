@@ -29,7 +29,7 @@ title: Programm
           {% assign nbr_rooms = site.location | size %}
           {% for room in site.location %}
             <th scope="col" style="width: {{ 100 | divided_by: nbr_rooms }}%">
-              <a href="{{ room.url }}">
+              <a href="{{ site.url }}{{ room.url }}">
                 {{ room.name }}
               </a>
             </th>
