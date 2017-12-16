@@ -67,5 +67,7 @@ time_steps: 15 # in minutes
 
 # Exclude from processing..
 exclude:
+  - README.md
+  - LICENSE.md
   - Gemfile
   - Gemfile.lock
