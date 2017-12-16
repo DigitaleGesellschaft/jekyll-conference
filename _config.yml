@@ -14,13 +14,13 @@ markdown: kramdown
 collections:
   talks:
     output: true
-    permalink: /:collection/:title
+    permalink: /:collection/:title/
   speakers:
     output: true
-    permalink: /:collection/:title
+    permalink: /:collection/:title/
   location:
     output: true
-    permalink: /:collection/:title
+    permalink: /:collection/:title/
 
 defaults:
   - scope:
