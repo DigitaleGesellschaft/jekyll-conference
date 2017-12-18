@@ -7,22 +7,22 @@ title: Sprecherinnen und Sprecher
 
 <p>
   {% assign cur_letter = blank %}
-  {% assign speakers = site.speakers | sort: 'name' %}
+  {% assign speakers = site.speakers | sort: 'last_name' %}
   {% for speaker in speakers %}
-    {% assign first_letter = speaker.name | slice: 0 | capitalize %}
-    {% if cur_letter != first_letter %}
+    {% assign last_letter = speaker.last_name | slice: 0 | capitalize %}
+    {% if cur_letter != last_letter %}
       {% if cur_letter != blank %}
         </ul>
       {% endif %}
 
-      {% assign cur_letter = first_letter %}
+      {% assign cur_letter = last_letter %}
       <h2>{{ cur_letter }}</h2>
       <ul>
     {% endif %}
 
     <li>
       <a href="{{ site.url }}{{ speaker.url}}">
-        {{ speaker.name }}
+        {{ speaker.first_name }} {{ speaker.last_name }}
       </a>
     </li>
   {% endfor %}
