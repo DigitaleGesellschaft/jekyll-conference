@@ -24,41 +24,53 @@
     <h5>Programm in diesem Raum:</h5>
     <p>
       <ul>
-        {% assign talks = site.talks | where: 'room', room.name | sort: 'date_start' %}
-        {% if talks.size > 0 %}
-          {% for talk in talks %}
+        {% for r in site.data.program %}
+          {% if r.room == room.name %}
+            {% if r.talks.size > 0 %}
+              {% for t in r.talks %}
+                {% assign talk = site.talks | where: 'name', t.name | first %}
 
-            {% assign talk_start_hour = talk.date_start | date: "%H" %}
-            {% assign talk_start_min = talk.date_start | date: "%M" | divided_by: site.time_steps | floor | times: site.time_steps %}
+                {% assign talk_start = t.time_start %}
+                {% assign talk_end = t.time_end %}
 
-            <li>
-              <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a>
-              &nbsp;
-              <a href="{{ site.url }}{{ talk.url }}">{{ talk.name }}</a>
-              &nbsp;
+                {% assign talk_start_hour = talk_start | split: ':' | first %}
+                {% assign talk_start_min = talk_start | split: ':' | last | divided_by: site.time_steps | floor | times: site.time_steps %}
 
-              {% for main_cat in site.main_categories %}
-                {% for cat in talk.categories %}
-                  {% if cat == main_cat.name %}
-                    {% assign talk_main_cat = main_cat.name %}
-                    {% assign talk_color = main_cat.color %}
-                    {% break %}
-                  {% endif %}
-                {% endfor %}
+                <li>
+                  <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a>
+                  &nbsp;
+                  <a href="{{ site.url }}{{ talk.url }}">{{ talk.name }}</a>
+                  &nbsp;
+
+                  {% for main_cat in site.main_categories %}
+                    {% for cat in talk.categories %}
+                      {% if cat == main_cat.name %}
+                        {% assign talk_main_cat = main_cat.name %}
+                        {% assign talk_color = main_cat.color %}
+                        {% break %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endfor %}
+                  <span class="badge" style="background-color: {{ talk_color }};">{{ talk_main_cat }}</span>
+                  {% for cat in talk.categories %}
+                    {% if cat != talk_main_cat %}
+                      <span class="badge badge-light">{{ cat }}</span>
+                    {% endif %}
+                  {% endfor %}
+                </li>
+
               {% endfor %}
-              <span class="badge" style="background-color: {{ talk_color }};">{{ talk_main_cat }}</span>
-              {% for cat in talk.categories %}
-                {% if cat != talk_main_cat %}
-                  <span class="badge badge-light">{{ cat }}</span>
-                {% endif %}
-              {% endfor %}
-            </li>
-          {% endfor %}
-        {% else %}
-          <li>
-            <em>keine Vorträge geplant</em>
-          </li>
-        {% endif %}
+
+            {% else %}
+              <li>
+                <em>keine Vorträge geplant</em>
+              </li>
+            {% endif %}
+
+            {% break %}
+          {% endif %}
+        {% endfor %}
+
       </ul>
     </p>
     {% endunless %}

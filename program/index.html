@@ -2,19 +2,50 @@
 layout: default
 title: Programm
 ---
-{% assign first_talk = site.talks | sort: 'date_start' | first %}
-{% assign start_date = first_talk.date_start %}
-{% assign start_hour = start_date | date: "%H" %}
-{% assign start_min = start_date | date: "%M" | divided_by: site.time_steps | floor | times: site.time_steps %}
 
-{% assign last_talk = site.talks | sort: 'date_end' | last %}
-{% assign end_date = last_talk.date_end %}
-{% assign end_hour = end_date | date: "%H" %}
-{% assign end_min = end_date | date: "%M" | divided_by: site.time_steps | ceil | times: site.time_steps %}
-{% if end_min >= 60 %}
-  {% assign end_hour = end_hour | plus: 1 %}
-  {% assign end_min = end_min | minus: 60 %}
-{% endif %}
+{% for room in site.data.program %}
+  {% assign first_talk = room.talks | first %}
+  {% assign cur_start_time = first_talk.time_start %}
+  {% assign cur_start_hour = cur_start_time | split: ':' | first %}
+  {% assign cur_start_min = cur_start_time | split: ':' | last | divided_by: site.time_steps | floor | times: site.time_steps %}
+
+  {% unless start_hour %}
+    {% assign update_var = 1 %}
+  {% else %}
+    {% if cur_start_hour < start_hour %}
+      {% assign update_var = 1 %}
+    {% elsif cur_start_hour == start_hour and cur_start_min < start_min %}
+      {% assign update_var = 1 %}
+    {% else %}
+      {% assign update_var = 0 %}
+    {% endif %}
+  {% endunless %}
+  {% if update_var == 1 %}
+    {% assign start_hour = cur_start_hour %}
+    {% assign start_min = cur_start_min %}
+  {% endif %}
+
+  {% assign last_talk = room.talks | last %}
+  {% assign cur_end_time = last_talk.time_end %}
+  {% assign cur_end_hour = cur_end_time | split: ':' | first %}
+  {% assign cur_end_min = cur_end_time | split: ':' | last | divided_by: site.time_steps | floor | times: site.time_steps %}
+
+  {% unless end_hour %}
+    {% assign update_var = 1 %}
+  {% else %}
+    {% if cur_end_hour > end_hour %}
+      {% assign update_var = 1 %}
+    {% elsif cur_end_hour == end_hour and cur_end_min > end_min %}
+      {% assign update_var = 1 %}
+    {% else %}
+      {% assign update_var = 0 %}
+    {% endif %}
+  {% endunless %}
+  {% if update_var == 1 %}
+    {% assign end_hour = cur_end_hour %}
+    {% assign end_min = cur_end_min %}
+  {% endif %}
+{% endfor %}
 
 {% assign total_duration_min = end_hour | minus: start_hour | times: 60 | minus: start_min | plus: end_min %}
 {% assign nbr_steps = total_duration_min | divided_by: site.time_steps %}
@@ -26,8 +57,9 @@ title: Programm
       <thead>
         <tr>
           <th scope="col">#</th>
-          {% assign nbr_rooms = site.location | size %}
-          {% for room in site.location %}
+          {% assign nbr_rooms = site.data.program | size %}
+          {% for r in site.data.program %}
+            {% assign room = site.location | where: 'name', r.room | first %}
             <th scope="col" style="width: {{ 100 | divided_by: nbr_rooms }}%">
               <a href="{{ site.url }}{{ room.url }}">
                 {{ room.name }}
@@ -47,16 +79,20 @@ title: Programm
                 {{ current_hour }}:00
               {% endif %}
             </th>
-            {% for room in site.location %}
+            {% for r in site.data.program %}
+              {% assign room = site.location | where: 'name', r.room | first %}
+
               {% assign active_talk = 0 %}
+              {% for t in r.talks %}
+                {% assign talk = site.talks | where: 'name', t.name | first %}
 
-              {% assign talks = site.talks | where: 'room', room.name | sort: 'date_start' %}
-              {% for talk in talks %}
+                {% assign talk_start = t.time_start %}
+                {% assign talk_end = t.time_end %}
 
-                {% assign talk_start_hour = talk.date_start | date: "%H" %}
-                {% assign talk_start_min = talk.date_start | date: "%M" | divided_by: site.time_steps | floor | times: site.time_steps %}
-                {% assign talk_end_hour = talk.date_end | date: "%H" %}
-                {% assign talk_end_min = talk.date_end | date: "%M" | divided_by: site.time_steps | ceil | times: site.time_steps %}
+                {% assign talk_start_hour = talk_start | split: ':' | first %}
+                {% assign talk_start_min = talk_start | split: ':' | last | divided_by: site.time_steps | floor | times: site.time_steps %}
+                {% assign talk_end_hour = talk_end | split: ':' | first %}
+                {% assign talk_end_min = talk_end | split: ':' | last | divided_by: site.time_steps | ceil | times: site.time_steps %}
 
                 {% assign d_start_hour = current_hour | minus: talk_start_hour %}
                 {% assign d_start_min = current_min | minus: talk_start_min %}
