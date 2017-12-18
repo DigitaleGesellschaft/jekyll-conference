@@ -55,13 +55,18 @@ navigation:
   - title: Kontakt
     relative_url: /contact/
 
-category_colors:
-  - rgb(231, 232, 234) # grey (default)
-  - rgb(204, 229, 255) # blue
-  - rgb(212, 237, 218) # green
-  - rgb(248, 215, 218) # red
-  - rgb(255, 243, 205) # yellow
-  - rgb(209, 236, 241) # turquoise
+main_categories:
+  - name: Cat A
+    color: rgb(204, 229, 255) # blue
+  - name: Cat B
+    color: rgb(212, 237, 218) # green
+
+  # rgb(231, 232, 234) # grey
+  # rgb(204, 229, 255) # blue
+  # rgb(212, 237, 218) # green
+  # rgb(248, 215, 218) # red
+  # rgb(255, 243, 205) # yellow
+  # rgb(209, 236, 241) # turquoise
 
 time_steps: 15 # in minutes
 

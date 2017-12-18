@@ -2,16 +2,22 @@
 
   {% assign talk = page %}
 
-  {% assign categories = site.talks | map: 'category' | uniq | sort %}
-  {% assign category_id = 0 %} <!-- default color -->
-  {% for category in categories %}
-    {% if category == talk.category %}
-      {% assign category_id = forloop.index %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
   <h5>
-    <span class="badge" style="background-color: {{ site.category_colors[category_id] }};">{{ talk.category }}</span>
+    {% for main_cat in site.main_categories %}
+      {% for cat in talk.categories %}
+        {% if cat == main_cat.name %}
+          {% assign talk_main_cat = main_cat.name %}
+          {% assign talk_color = main_cat.color %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+    <span class="badge" style="background-color: {{ talk_color }};">{{ talk_main_cat }}</span>
+    {% for cat in talk.categories %}
+      {% if cat != talk_main_cat %}
+        <span class="badge badge-light">{{ cat }}</span>
+      {% endif %}
+    {% endfor %}
   </h5>
 
   <h1>Vortrag: {{ talk.name }}</h1>

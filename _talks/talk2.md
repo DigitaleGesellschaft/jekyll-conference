@@ -6,7 +6,9 @@ date_end: 2018-02-24 14:00:00 +0100
 speakers:
   - Last Name, First Name
   - Last Name, Second Name
-category: Cat A
+categories:
+  - Cat A
+  - Talk
 ---
 
 Talk description goes here

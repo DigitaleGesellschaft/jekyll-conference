@@ -5,42 +5,41 @@ title: Vorträge
 
 <h1>{{ page.title }}</h1>
 
-{% assign cur_category = blank %}
-{% assign category_id = 0 %}
-{% assign talks = site.talks | sort: 'name' | sort: 'category' %}
-{% for talk in talks %}
-  {% assign category = talk.category %}
-  {% if cur_category != category %}
-    {% if cur_category != blank %}
-        </ul>
-      </p>
-    {% endif %}
+{% for main_cat in site.main_categories %}
+  <h4><span class="badge" style="background-color: {{ main_cat.color }};">{{ main_cat.name }}</span></h4>
+  <p>
+    <ul>
+      {% for talk in site.talks %}
+        {% for cat in talk.categories %}
+          {% if cat == main_cat.name %}
+            <li>
+              <a href="{{ site.url }}{{ talk.url}}">
+                {{ talk.name }}
+              </a>
 
-    {% assign cur_category = category %}
-    {% assign category_id = category_id | plus: 1 %}
-    <h4><span class="badge" style="background-color: {{ site.category_colors[category_id] }};">{{ category }}</span></h4>
-    <p>
-      <ul>
-  {% endif %}
+              {% for cat in talk.categories %}
+                {% if cat != main_cat.name %}
+                  <span class="badge badge-light">{{ cat }}</span>
+                {% endif %}
+              {% endfor %}
 
-  <li>
-    <a href="{{ site.url }}{{ talk.url}}">
-      {{ talk.name }}
-    </a>
-
-    von
-    {% for speaker_name in talk.speakers %}
-      {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
-      {% assign names = speaker.name | split: ', ' %}
-      <a href="{{ site.url }}{{ speaker.url }}">
-        {{ names | last | slice: 0 }}. {{ names | first }}</a><!--
-      {% if forloop.last != true %}
-        -->,
-      {% else %}
-        -->
-      {% endif %}
-    {% endfor %}
-  </li>
+              von
+              {% for speaker_name in talk.speakers %}
+                {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
+                {% assign names = speaker.name | split: ', ' %}
+                <a href="{{ site.url }}{{ speaker.url }}">
+                  {{ names | last | slice: 0 }}. {{ names | first }}</a><!--
+                {% if forloop.last != true %}
+                  -->,
+                {% else %}
+                  -->
+                {% endif %}
+              {% endfor %}
+            </li>
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </p>
 {% endfor %}
-</ul>
-</p>

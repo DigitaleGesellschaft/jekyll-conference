@@ -37,8 +37,6 @@ title: Programm
         </tr>
       </thead>
       <tbody>
-        {% assign categories = site.talks | map: 'category' | uniq | sort %}
-
         {% for i in (1..nbr_steps) %}
           {% assign current_hour = i | minus: 1 | times: site.time_steps | plus: start_min | divided_by: 60 | floor | plus: start_hour | modulo: 24  %}
           {% assign current_min = i | minus: 1 | times: site.time_steps | plus: start_min | modulo: 60 %}
@@ -70,19 +68,28 @@ title: Programm
                     {% assign talk_duration_min = talk_end_hour | minus: talk_start_hour | times: 60 | minus: talk_start_min | plus: talk_end_min %}
                     {% assign talk_nbr_steps = talk_duration_min | divided_by: site.time_steps %}
 
-                    {% assign category_id = 0 %} <!-- default color -->
-                    {% for category in categories %}
-                      {% if category == talk.category %}
-                        {% assign category_id = forloop.index %}
-                        {% break %}
-                      {% endif %}
+                    {% for main_cat in site.main_categories %}
+                      {% for cat in talk.categories %}
+                        {% if cat == main_cat.name %}
+                          {% assign talk_main_cat = main_cat.name %}
+                          {% assign talk_color = main_cat.color %}
+                          {% break %}
+                        {% endif %}
+                      {% endfor %}
                     {% endfor %}
-                    <td rowspan="{{ talk_nbr_steps }}" class="talk" style="background-color: {{ site.category_colors[category_id] }};">
+
+                    <td rowspan="{{ talk_nbr_steps }}" class="talk" style="background-color: {{ talk_color }};">
                       <strong>
                         <a href="{{ site.url }}{{ talk.url }}">
                           {{ talk.name }}
                         </a>
                       </strong> <br />
+                      {% for cat in talk.categories %}
+                        {% if cat != talk_main_cat %}
+                          <span class="badge badge-light">{{ cat }}</span>
+                        {% endif %}
+                      {% endfor %}
+                      <br />
                       <em>
                         {% for speaker_name in talk.speakers %}
                           {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
@@ -136,12 +143,12 @@ title: Programm
     </table>
   </p>
 
-  {% if categories.size > 0 %}
+  {% if site.main_categories.size > 0 %}
     &nbsp;
     <h5>Legende</h5>
     <p>
-      {% for category in categories %}
-        <span class="badge" style="background-color: {{ site.category_colors[forloop.index] }};">{{ category }}</span>
+      {% for main_cat in site.main_categories %}
+        <span class="badge" style="background-color: {{ main_cat.color }};">{{ main_cat.name }}</span>
       {% endfor %}
     </p>
   {% endif %}
