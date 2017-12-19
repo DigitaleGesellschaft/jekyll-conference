@@ -22,7 +22,7 @@
 
   <h1>{{ talk.name }}</h1>
 
-  <p>
+  <p class="p-speaker">
     <em>
       {% for speaker_name in talk.speakers %}
         {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
@@ -37,31 +37,36 @@
     </em>
   </p>
 
-  {% for room in site.data.program %}
-    {% for t in room.talks %}
-      {% if talk.name == t.name %}
-        {% assign talk_room = room.room %}
-        {% assign talk_start = t.time_start %}
-        {% assign talk_end = t.time_end %}
-        {% break %}
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
-
-  {% assign talk_start_hour = talk_start | split: ':' | first %}
-  {% assign talk_start_min = talk_start | split: ':' | last | divided_by: site.time_steps | floor | times: site.time_steps %}
-  {% assign talk_end_hour = talk_end | split: ':' | first %}
-  {% assign talk_end_min = talk_end | split: ':' | last | divided_by: site.time_steps | ceil | times: site.time_steps %}
-
-  {% assign talk_duration_min = talk_end_hour | minus: talk_start_hour | times: 60 | minus: talk_start_min | plus: talk_end_min %}
-
-  {% assign room = site.location | where: 'name', talk_room | first %}
   <p>
-    Beginn um <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a> Uhr
+    {% assign first_talk = 1 %}
+    {% for r in site.data.program %}
+      {% for t in r.talks %}
+        {% if talk.name == t.name %}
+          {% if first_talk != 1 %}
+            <br />
+          {% else %}
+            {% assign first_talk = 0 %}
+          {% endif %}
 
-    in <a href="{{ site.url }}{{ room.url }}" class="badge badge-light">{{ room.name }}</a>,
+          {% assign talk_start = t.time_start %}
+          {% assign talk_end = t.time_end %}
 
-    Dauer: <span class="badge badge-light">{{ talk_duration_min }}min</span>
+          {% assign talk_start_hour = talk_start | split: ':' | first %}
+          {% assign talk_start_min = talk_start | split: ':' | last | divided_by: site.time_steps | floor | times: site.time_steps %}
+          {% assign talk_end_hour = talk_end | split: ':' | first %}
+          {% assign talk_end_min = talk_end | split: ':' | last | divided_by: site.time_steps | ceil | times: site.time_steps %}
+
+          {% assign talk_duration_min = talk_end_hour | minus: talk_start_hour | times: 60 | minus: talk_start_min | plus: talk_end_min %}
+
+          {% assign room = site.location | where: 'name', r.room | first %}
+          Beginn um <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a> Uhr
+
+          in <a href="{{ site.url }}{{ room.url }}" class="badge badge-light">{{ room.name }}</a>,
+
+          Dauer: <span class="badge badge-light">{{ talk_duration_min }}min</span>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
   </p>
 
   {{ content }}
