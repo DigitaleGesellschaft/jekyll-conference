@@ -63,6 +63,10 @@ main_categories:
 
 time_steps: 15 # in minutes
 
+hide_links:
+  location: false
+  speakers: false
+
 # Exclude from processing..
 exclude:
   - README.md

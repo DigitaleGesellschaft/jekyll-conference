@@ -26,13 +26,17 @@
     <em>
       {% for speaker_name in talk.speakers %}
         {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
-        <a href="{{ site.url }}{{ speaker.url }}">
-          {{ speaker.first_name | slice: 0 }}. {{ speaker.last_name }}</a><!--
-          {% if forloop.last != true %}
-            -->,
-          {% else %}
-            -->
-          {% endif %}
+        {% if site.hide_links['speakers'] != true %}
+          <a href="{{ site.url }}{{ speaker.url }}">
+            {{ speaker.first_name | slice: 0 }}. {{ speaker.last_name }}</a><!--
+        {% else %}
+          {{ speaker.first_name | slice: 0 }}. {{ speaker.last_name }}<!--
+        {% endif %}
+        {% if forloop.last != true %}
+          -->,
+        {% else %}
+          -->
+        {% endif %}
       {% endfor %}
     </em>
   </p>
@@ -61,7 +65,12 @@
           {% assign room = site.location | where: 'name', r.room | first %}
           Beginn um <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a> Uhr
 
-          in <a href="{{ site.url }}{{ room.url }}" class="badge badge-light">{{ room.name }}</a>,
+          in
+          {% if site.hide_links['location'] != true %}
+            <a href="{{ site.url }}{{ room.url }}" class="badge badge-light">{{ room.name }}</a>,
+          {% else %}
+            <span class="badge badge-light">{{ room.name }}</span>,
+          {% endif %}
 
           Dauer: <span class="badge badge-light">{{ talk_duration_min }}min</span>
         {% endif %}
