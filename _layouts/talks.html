@@ -65,7 +65,7 @@
           {% assign room = site.location | where: 'name', r.room | first %}
           Beginn um <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a> Uhr
 
-          in
+          im Raum
           {% if site.hide_links['location'] != true %}
             <a href="{{ site.url }}{{ room.url }}" class="badge badge-light">{{ room.name }}</a>,
           {% else %}

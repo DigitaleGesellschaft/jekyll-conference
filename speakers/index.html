@@ -5,19 +5,21 @@ title: Sprecherinnen und Sprecher
 
 <h1>{{ page.title }}</h1>
 
-<p>
-  {% assign cur_letter = blank %}
+<div class="div-speakerlist">
+  {% assign cur_letter = false %}
   {% assign speakers = site.speakers | sort: 'last_name' %}
   {% for speaker in speakers %}
     {% assign last_letter = speaker.last_name | slice: 0 | capitalize %}
     {% if cur_letter != last_letter %}
-      {% if cur_letter != blank %}
-        </ul>
+      {% if cur_letter %}
+          </ul>
+        </div>
       {% endif %}
 
       {% assign cur_letter = last_letter %}
-      <h2>{{ cur_letter }}</h2>
-      <ul>
+      <div class="div-speakergroup">
+        <h3>{{ cur_letter }}</h3>
+        <ul>
     {% endif %}
 
     <li>
@@ -26,5 +28,6 @@ title: Sprecherinnen und Sprecher
       </a>
     </li>
   {% endfor %}
-  </ul>
-</p>
+    </ul>
+  </div>
+</div>
