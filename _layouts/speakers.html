@@ -2,7 +2,11 @@
 
   {% assign speaker = page %}
 
-  <h1>SprecherIn: {{ speaker.first_name }} {{ speaker.last_name }}</h1>
+  <h5>
+    <span class="badge badge-light">SprecherIn</span>
+  </h5>
+
+  <h1>{{ speaker.first_name }} {{ speaker.last_name }}</h1>
 
   {{ content }}
 
@@ -14,7 +18,7 @@
       {% for talk in site.talks %}
         {% assign is_speaker = false %}
         {% for speaker_name in talk.speakers %}
-          {% if speaker_name == speaker.title %}
+          {% if speaker_name == speaker.name %}
             {% assign is_speaker = true %}
             {% break %}
           {% endif %}

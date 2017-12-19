@@ -25,7 +25,7 @@ title: Vorträge
 
               von
               {% for speaker_name in talk.speakers %}
-                {% assign speaker = site.speakers | where: 'title', speaker_name | first %}
+                {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
                 <a href="{{ site.url }}{{ speaker.url }}">
                   {{ speaker.first_name | slice: 0 }}. {{ speaker.last_name }}</a><!--
                   {% if forloop.last != true %}

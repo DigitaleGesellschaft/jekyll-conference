@@ -1,5 +1,5 @@
 ---
-title: Second Name Last Name
+name: Second Name Last Name
 first_name: Second Name
 last_name: Last Name
 ---
