@@ -6,7 +6,7 @@ title: Vorträge
 <h1>{{ page.title }}</h1>
 
 {% for main_cat in site.main_categories %}
-  <h4><span class="badge" style="background-color: {{ main_cat.color }};">{{ main_cat.name }}</span></h4>
+  <h4><span class="badge badge-{{ main_cat.color }}">{{ main_cat.name }}</span></h4>
   <p>
     <ul>
       {% for talk in site.talks %}

@@ -114,7 +114,7 @@ title: Programm
                       {% endfor %}
                     {% endfor %}
 
-                    <td rowspan="{{ talk_nbr_steps }}" class="talk" style="background-color: {{ talk_color }};">
+                    <td rowspan="{{ talk_nbr_steps }}" class="alert alert-{{ talk_color }}">
                       <strong>
                         <a href="{{ site.url }}{{ talk.url }}">
                           {{ talk.name }}
@@ -183,7 +183,7 @@ title: Programm
     <h5>Legende</h5>
     <p>
       {% for main_cat in site.main_categories %}
-        <span class="badge" style="background-color: {{ main_cat.color }};">{{ main_cat.name }}</span>
+        <span class="badge badge-{{ main_cat.color }}">{{ main_cat.name }}</span>
       {% endfor %}
     </p>
   {% endif %}
