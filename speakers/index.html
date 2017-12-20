@@ -23,9 +23,20 @@ title: Sprecherinnen und Sprecher
     {% endif %}
 
     <li>
-      <a href="{{ site.url }}{{ speaker.url}}">
+      {% assign hide_speaker = false %}
+      {% for hidden_speaker in site.hide_links['speakers'] %}
+        {% if hidden_speaker == speaker.name %}
+          {% assign hide_speaker = true %}
+          {% break %}
+        {% endif %}
+      {% endfor %}
+      {% if hide_speaker %}
         {{ speaker.first_name }} {{ speaker.last_name }}
-      </a>
+      {% else %}
+        <a href="{{ site.url }}{{ speaker.url}}">
+          {{ speaker.first_name }} {{ speaker.last_name }}
+        </a>
+      {% endif %}
     </li>
   {% endfor %}
     </ul>

@@ -24,20 +24,7 @@
 
   <p class="p-speaker">
     <em>
-      {% for speaker_name in talk.speakers %}
-        {% assign speaker = site.speakers | where: 'name', speaker_name | first %}
-        {% if site.hide_links['speakers'] != true %}
-          <a href="{{ site.url }}{{ speaker.url }}">
-            {{ speaker.first_name | slice: 0 }}. {{ speaker.last_name }}</a><!--
-        {% else %}
-          {{ speaker.first_name | slice: 0 }}. {{ speaker.last_name }}<!--
-        {% endif %}
-        {% if forloop.last != true %}
-          -->,
-        {% else %}
-          -->
-        {% endif %}
-      {% endfor %}
+      {% include speaker_list.html %}
     </em>
   </p>
 
