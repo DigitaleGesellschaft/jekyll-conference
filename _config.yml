@@ -1,10 +1,6 @@
 title: Congress 2018
 description: >-
   A short description
-long_description: >-
-  A long description which goes on and on and on and on and on and on and on
-  and on and on and on and on and on and on and on and on and on and on and on
-  and on and on and on and on and on and on and on and on and on and on ...
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
