@@ -1,6 +1,17 @@
 ---
 ---
 
+// Program styling
+
+// overflow
+.p-table {
+  display: block;
+  width: 100%;
+  overflow: scroll;
+
+  margin-top: 1rem;
+}
+
 // outer border settings
 .table {
   border: 0px none;
