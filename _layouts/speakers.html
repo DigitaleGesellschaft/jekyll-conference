@@ -28,7 +28,9 @@
           {% assign no_talks = false %}
 
           <li>
-            <a href="{{ talk.url | prepend: site.baseurl }}">{{ talk.name }}</a>
+
+            {% include talk_list.html %}
+
             &nbsp;
             {% for main_cat in site.main_categories %}
               {% for cat in talk.categories %}

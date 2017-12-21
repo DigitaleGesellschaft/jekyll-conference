@@ -13,9 +13,7 @@ title: Vorträge
         {% for cat in talk.categories %}
           {% if cat == main_cat.name %}
             <li>
-              <a href="{{ talk.url | prepend: site.baseurl }}">
-                {{ talk.name }}
-              </a>
+              {% include talk_list.html %}
 
               {% for cat in talk.categories %}
                 {% if cat != main_cat.name %}
@@ -24,6 +22,29 @@ title: Vorträge
               {% endfor %}
 
               von {% include speaker_list.html %}
+
+              {% if hide_talk %}
+
+                {% for r in site.data.program %}
+                  {% for t in r.talks %}
+                    {% if talk.name == t.name %}
+                      {% assign talk_start = t.time_start %}
+                      {% assign room = site.location | where: 'name', r.room | first %}
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
+                {% endfor %}
+
+                um <a href="{{ site.baseurl }}{% link program/index.html %}" class="badge badge-light">{{ talk_start }}</a> Uhr
+
+                im Raum
+                {% if site.hide_links['location'] != true %}
+                  <a href="{{ room.url | prepend: site.baseurl }}" class="badge badge-light">{{ room.name }}</a>
+                {% else %}
+                  <span class="badge badge-light">{{ room.name }}</span>
+                {% endif %}
+              {% endif %}
+
             </li>
             {% break %}
           {% endif %}

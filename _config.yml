@@ -63,6 +63,8 @@ hide_links:
   location: false
   speakers:
     - The Anonymous
+  talks:
+    - Talk 2
 
 # Exclude from processing..
 exclude:

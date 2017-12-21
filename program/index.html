@@ -117,11 +117,10 @@ title: Programm
                     {% endfor %}
 
                     <td rowspan="{{ talk_nbr_steps }}" class="alert alert-{{ talk_color }}">
-                      <strong>
-                        <a href="{{ talk.url | prepend: site.baseurl }}">
-                          {{ talk.name }}
-                        </a>
-                      </strong> <br />
+
+                      <strong>{% include talk_list.html %}</strong>
+                      <br />
+
                       {% assign contained_cat = false %}
                       {% for cat in talk.categories %}
                         {% if cat != talk_main_cat %}
