@@ -7,7 +7,7 @@
 .p-table {
   display: block;
   width: 100%;
-  overflow: scroll;
+  overflow-y: auto;
 
   margin-top: 1rem;
 }
