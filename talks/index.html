@@ -13,7 +13,7 @@ title: Vorträge
         {% for cat in talk.categories %}
           {% if cat == main_cat.name %}
             <li>
-              <a href="{{ site.url }}{{ talk.url}}">
+              <a href="{{ talk.url | prepend: site.baseurl }}">
                 {{ talk.name }}
               </a>
 

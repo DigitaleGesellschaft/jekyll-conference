@@ -17,7 +17,7 @@
   {% if hide_speaker %}
     {{ speaker_short }}<!--
   {% else %}
-    <a href="{{ site.url }}{{ speaker.url }}">{{ speaker_short }}</a><!--
+    <a href="{{ speaker.url | prepend: site.baseurl }}">{{ speaker_short }}</a><!--
   {% endif %}
   {% if forloop.last != true %}
     -->,

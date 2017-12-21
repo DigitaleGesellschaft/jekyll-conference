@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
     {% unless page.name contains '.' %}{{ page.name }} - {% else %}{% if page.title %}{{ page.title }} - {% endif %}{% endunless %}{{ site.title }}</title>
-    <link rel="stylesheet" href="{{ site.url }}/assets/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="{{ site.url }}/assets/css/main.css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ site.baseurl }}/assets/css/main.css" />
 
 </head>
 <body>
   <header>
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="container">
-        <a class="navbar-brand" href="{{ site.url }}">{{ site.title }}</a>
+        <a class="navbar-brand" href="{{ site.baseurl }}">{{ site.title }}</a>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             {% assign navigation = site.navigation | where_exp: 'link', 'link.navbar_name' %}
             {% for link in navigation %}
               <li class="nav-item {% if page.url contains link.relative_url %}active{% endif %}">
-                <a class="nav-link" href="{% if link.absolute_url %}{{ link.absolute_url }}{% else %}{{ site.url }}{{ link.relative_url }}{% endif %}">{{ link.navbar_name }}</span></a>
+                <a class="nav-link" href="{% if link.absolute_url %}{{ link.absolute_url }}{% else %}{{ site.baseurl }}{{ link.relative_url }}{% endif %}">{{ link.navbar_name }}</span></a>
               </li>
             {% endfor %}
           </ul>

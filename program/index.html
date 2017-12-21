@@ -62,7 +62,7 @@ title: Programm
             {% assign room = site.location | where: 'name', r.room | first %}
             <th scope="col" style="width: {{ 100 | divided_by: nbr_rooms }}%">
               {% if site.hide_links['location'] != true %}
-                <a href="{{ site.url }}{{ room.url }}">{{ room.name }}</a>
+                <a href="{{ room.url | prepend: site.baseurl }}">{{ room.name }}</a>
               {% else %}
                 {{ room.name }}
               {% endif %}
@@ -118,7 +118,7 @@ title: Programm
 
                     <td rowspan="{{ talk_nbr_steps }}" class="alert alert-{{ talk_color }}">
                       <strong>
-                        <a href="{{ site.url }}{{ talk.url }}">
+                        <a href="{{ talk.url | prepend: site.baseurl }}">
                           {{ talk.name }}
                         </a>
                       </strong> <br />

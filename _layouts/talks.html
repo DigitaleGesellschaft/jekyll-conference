@@ -50,11 +50,11 @@
           {% assign talk_duration_min = talk_end_hour | minus: talk_start_hour | times: 60 | minus: talk_start_min | plus: talk_end_min %}
 
           {% assign room = site.location | where: 'name', r.room | first %}
-          Beginn um <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a> Uhr
+          Beginn um <a href="{{ site.baseurl }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a> Uhr
 
           im Raum
           {% if site.hide_links['location'] != true %}
-            <a href="{{ site.url }}{{ room.url }}" class="badge badge-light">{{ room.name }}</a>,
+            <a href="{{ room.url | prepend: site.baseurl }}" class="badge badge-light">{{ room.name }}</a>,
           {% else %}
             <span class="badge badge-light">{{ room.name }}</span>,
           {% endif %}
@@ -69,10 +69,10 @@
 
   &nbsp;
   <p>
-    <a href="{{ site.url }}{% link talks/index.html %}">zurück zur Übersicht</a>
+    <a href="{{ site.baseurl }}{% link talks/index.html %}">zurück zur Übersicht</a>
   </p>
   <p>
-    <a href="{{ site.url }}{% link program/index.html %}">zurück zum Program</a>
+    <a href="{{ site.baseurl }}{% link program/index.html %}">zurück zum Program</a>
   </p>
 
 {% include footer.html %}

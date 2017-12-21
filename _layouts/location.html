@@ -7,11 +7,11 @@
   <p>
     <ul class="nav nav-pills">
       <li class="nav-item">
-        <a class="nav-link {% if page.name contains 'index' %}active{% endif %}" href="{{ site.url }}{% link location/index.md %}">Plan</a>
+        <a class="nav-link {% if page.name contains 'index' %}active{% endif %}" href="{{ site.baseurl }}{% link location/index.md %}">Plan</a>
       </li>
       {% for r in site.location %}
         <li class="nav-item">
-          <a class="nav-link {% if room.name == r.name %}active{% endif %}" href="{{ site.url }}{{ r.url }}">{{ r.name }}</a>
+          <a class="nav-link {% if room.name == r.name %}active{% endif %}" href="{{ r.url | prepend: site.baseurl }}">{{ r.name }}</a>
         </li>
       {% endfor %}
     </ul>
@@ -37,9 +37,9 @@
                 {% assign talk_start_min = talk_start | split: ':' | last | divided_by: site.time_steps | floor | times: site.time_steps %}
 
                 <li>
-                  <a href="{{ site.url }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a>
+                  <a href="{{ site.baseurl }}{% link program/index.html %}" class="badge badge-light">{{ talk_start_hour }}:{% if talk_start_min == 0 %}0{%endif %}{{ talk_start_min }}</a>
                   &nbsp;
-                  <a href="{{ site.url }}{{ talk.url }}">{{ talk.name }}</a>
+                  <a href="{{ talk.url | prepend: site.baseurl }}">{{ talk.name }}</a>
                   &nbsp;
 
                   {% for main_cat in site.main_categories %}

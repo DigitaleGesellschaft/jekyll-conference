@@ -33,7 +33,7 @@ title: Sprecherinnen und Sprecher
       {% if hide_speaker %}
         {{ speaker.first_name }} {{ speaker.last_name }}
       {% else %}
-        <a href="{{ site.url }}{{ speaker.url}}">
+        <a href="{{ speaker.url | prepend: site.baseurl }}">
           {{ speaker.first_name }} {{ speaker.last_name }}
         </a>
       {% endif %}
