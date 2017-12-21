@@ -122,12 +122,16 @@ title: Programm
                           {{ talk.name }}
                         </a>
                       </strong> <br />
+                      {% assign contained_cat = false %}
                       {% for cat in talk.categories %}
                         {% if cat != talk_main_cat %}
+                          {% assign contained_cat = true %}
                           <span class="badge badge-light">{{ cat }}</span>
                         {% endif %}
                       {% endfor %}
-                      <br />
+                      {% if contained_cat %}
+                        <br />
+                      {% endif %}
                       <em>
                         {% include speaker_list.html %}
                       </em>
