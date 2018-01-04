@@ -1,5 +1,5 @@
 
-# conference-prgm
+# jekyll-conference
 
 This is a [Jekyll](http://jekyllrb.com) template based on [Bootstrap 4](http://getbootstrap.com) which can be used to make a simple website for a one-day conference or workshop containing:
 
