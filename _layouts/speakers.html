@@ -15,6 +15,7 @@
   <p>
     <ul>
       {% assign no_talks = true %}
+
       {% for talk in site.talks %}
         {% assign is_speaker = false %}
         {% for speaker_name in talk.speakers %}
@@ -28,21 +29,20 @@
           {% assign no_talks = false %}
 
           <li>
-
-            {% include talk_list.html %}
-
+            {% include show_talk.html %}
             &nbsp;
-            {% include category_list.html %}
+            {% include list_categories.html %}
           </li>
 
         {% endif %}
-
       {% endfor %}
+
       {% if no_talks %}
         <li>
           <em>keine</em>
         </li>
       {% endif %}
+
     </ul>
 
   </p>

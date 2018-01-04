@@ -7,9 +7,3 @@
     {% endif %}
   {% endfor %}
 {% endfor %}
-<span class="badge badge-{{ talk_color }}">{{ talk_main_cat }}</span>
-{% for cat in talk.categories %}
-  {% if cat != talk_main_cat %}
-    <span class="badge badge-light">{{ cat }}</span>
-  {% endif %}
-{% endfor %}
