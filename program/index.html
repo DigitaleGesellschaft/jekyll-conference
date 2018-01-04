@@ -117,7 +117,7 @@ title: Programm
 
                   {% assign talk_nbr_steps = talk_duration_min | divided_by: site.time_steps %}
                   {% include get_main_category.html %}
-                  <td rowspan="{{ talk_nbr_steps }}" class="alert alert-{{ talk_color }}">
+                  <td rowspan="{{ talk_nbr_steps }}" class="alert alert-{{ main_cat_color }}">
 
                     <strong>{% include show_talk.html %}</strong>
                     <br />

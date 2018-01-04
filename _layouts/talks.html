@@ -29,7 +29,7 @@
           Beginn um {% include show_talk_time.html %} Uhr
 
           {% assign room = site.location | where: 'name', r.room | first %}
-          im Raum {% include show_room.html %}
+          im Raum {% include show_room.html %},
 
           Dauer: <span class="badge badge-light">{{ talk_duration_min }}min</span>
         {% endif %}

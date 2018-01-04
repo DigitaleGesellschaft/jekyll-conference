@@ -1,7 +1,7 @@
 {% assign has_sub_categories = false %}
 
 {% for cat in talk.categories %}
-  {% if cat != talk_main_cat %}
+  {% if cat != main_cat %}
     {% assign has_sub_categories = true %}
 
     <span class="badge badge-light">{{ cat }}</span>
