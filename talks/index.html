@@ -23,7 +23,7 @@ title: Vorträge
 
               von {% include speaker_list.html %}
 
-              {% if hide_talk %}
+              {% if talk.hide %}
 
                 {% for r in site.data.program %}
                   {% for t in r.talks %}
@@ -38,10 +38,10 @@ title: Vorträge
                 um <a href="{{ site.baseurl }}{% link program/index.html %}" class="badge badge-light">{{ talk_start }}</a> Uhr
 
                 im Raum
-                {% if site.hide_links['location'] != true %}
-                  <a href="{{ room.url | prepend: site.baseurl }}" class="badge badge-light">{{ room.name }}</a>
-                {% else %}
+                {% if room.hide %}
                   <span class="badge badge-light">{{ room.name }}</span>
+                {% else %}
+                  <a href="{{ room.url | prepend: site.baseurl }}" class="badge badge-light">{{ room.name }}</a>
                 {% endif %}
               {% endif %}
 
