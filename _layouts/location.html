@@ -11,7 +11,11 @@
       </li>
       {% for r in site.location %}
         <li class="nav-item">
-          <a class="nav-link {% if room.name == r.name %}active{% endif %}" href="{{ r.url | prepend: site.baseurl }}">{{ r.name }}</a>
+          {% if r.hide %}
+            <span class="nav-item nav-link disabled">{{ r.name }}</span>
+          {% else %}
+            <a class="nav-link {% if room.name == r.name %}active{% endif %}" href="{{ r.url | prepend: site.baseurl }}">{{ r.name }}</a>
+          {% endif %}
         </li>
       {% endfor %}
     </ul>

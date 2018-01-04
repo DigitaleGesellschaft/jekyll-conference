@@ -1,16 +1,4 @@
-{% assign hide_talk = false %}
-{% if site.hide_links['talks'] != true %}
-  {% for hidden_talk in site.hide_links['talks'] %}
-    {% if hidden_talk == talk.name %}
-      {% assign hide_talk = true %}
-      {% break %}
-    {% endif %}
-  {% endfor %}
-{% else %}
-  {% assign hide_talk = true %}
-{% endif %}
-
-{% if hide_talk %}
+{% if talk.hide %}
   {{ talk.name }}
 {% else %}
   <a href="{{ talk.url | prepend: site.baseurl }}">{{ talk.name }}</a>

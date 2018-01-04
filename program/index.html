@@ -61,10 +61,10 @@ title: Programm
           {% for r in site.data.program %}
             {% assign room = site.location | where: 'name', r.room | first %}
             <th scope="col" style="width: {{ 100 | divided_by: nbr_rooms }}%">
-              {% if site.hide_links['location'] != true %}
-                <a href="{{ room.url | prepend: site.baseurl }}">{{ room.name }}</a>
-              {% else %}
+              {% if room.hide %}
                 {{ room.name }}
+              {% else %}
+                <a href="{{ room.url | prepend: site.baseurl }}">{{ room.name }}</a>
               {% endif %}
             </th>
           {% endfor %}

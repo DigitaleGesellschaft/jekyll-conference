@@ -58,14 +58,6 @@ main_categories:
     color: success
 
 time_steps: 15 # in minutes
-
-hide_links:
-  location: false
-  speakers:
-    - The Anonymous
-  talks:
-    - Talk 2
-
 show_firstname: true
 
 # Exclude from processing..
