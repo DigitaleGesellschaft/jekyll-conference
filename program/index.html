@@ -48,6 +48,19 @@ title: Programm
 {% assign total_duration_min = end_hour | minus: start_hour | times: 60 | minus: start_min | plus: end_min %}
 {% assign nbr_steps = total_duration_min | divided_by: site.time_steps %}
 
+{% assign talk_start_times = "" %}
+{% for r in site.data.program %}
+  {% for t in r.talks %}
+    {% unless talk_start_times contains t.time_start %}
+      {% unless talk_start_times == "" %}
+        {% assign talk_start_times = talk_start_times | append: "," %}
+      {% endunless %}
+      {% assign talk_start_times = talk_start_times | append: t.time_start %}
+    {% endunless %}
+  {% endfor %}
+{% endfor %}
+
+
   <h1>{{ page.title }}</h1>
 
   <div class="p-table">
@@ -72,13 +85,26 @@ title: Programm
         {% for i in (1..nbr_steps) %}
           {% assign current_hour = i | minus: 1 | times: site.time_steps | plus: start_min | divided_by: 60 | floor | plus: start_hour | modulo: 24  %}
           {% assign current_min = i | minus: 1 | times: site.time_steps | plus: start_min | modulo: 60 %}
+          {% if current_min < 10 %}
+            {% assign current_time = current_hour | append: ':0' | append: current_min %}
+          {% else %}
+            {% assign current_time = current_hour | append: ':' | append: current_min %}
+          {% endif %}
 
           <tr>
-            <th scope="row">
-              {% if current_min == 0 %}
-                {{ current_hour }}:00
-              {% endif %}
-            </th>
+
+            {% if talk_start_times contains current_time and site.show_starttime %}
+              <th scope="row">
+                {{ current_time }}
+              </th>
+            {% elsif current_min == 0 %}
+              <th scope="row"{% if site.show_starttime %} class="text-muted"{% endif %}>
+                {{ current_time }}
+              </th>
+            {% else %}
+              <th scope="row"></th>
+            {% endif %}
+
             {% for r in site.data.program %}
               {% assign room = site.location | where: 'name', r.room | first %}
 

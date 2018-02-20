@@ -71,3 +71,4 @@ main_categories:
 
 time_steps: 15 # in minutes
 show_firstname: true
+show_starttime: true
