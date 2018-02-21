@@ -93,12 +93,12 @@ title: Programm
 
           <tr>
 
-            {% if talk_start_times contains current_time and site.show_starttime %}
+            {% if current_min == 0 %}
               <th scope="row">
                 {{ current_time }}
               </th>
-            {% elsif current_min == 0 %}
-              <th scope="row"{% if site.show_starttime %} class="text-muted"{% endif %}>
+            {% elsif talk_start_times contains current_time and site.show_starttime %}
+              <th scope="row" class="text-muted">
                 {{ current_time }}
               </th>
             {% else %}
