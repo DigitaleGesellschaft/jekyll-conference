@@ -10,6 +10,7 @@
 </head>
 <body>
   <header>
+    <!-- navigation bar (web only): -->
     <nav class="navbar navbar-expand-md navbar-light bg-light">
       <div class="container">
         <a class="navbar-brand" href="{{ site.baseurl }}">{{ site.title }}</a>
@@ -38,6 +39,12 @@
         </button>
       </div>
     </nav>
+
+    <!-- site title (print only): -->
+    <h1 class="container display-4 d-none d-print-inline">
+      {{ site.title }}
+    </h1>
+
   </header>
   &nbsp;
   <main class="container">

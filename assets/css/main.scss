@@ -4,7 +4,7 @@
 @import "bootstrap-custom";
 
 
-// Program styling
+// Program Styling
 
 // overflow
 .p-table {
@@ -55,12 +55,14 @@ tbody tr {
   }
 }
 
-// talk styling
+
+// Talk Styling
 .p-speaker {
   margin-bottom: 0.5rem;
 }
 
-// speaker styling
+
+// Speaker Styling
 @media (min-width: 576px) {
   .div-speakerlist {
     -webkit-column-count: 1;
@@ -84,4 +86,23 @@ tbody tr {
   page-break-inside: avoid;
   break-inside: avoid-column;
   display: table;
+}
+
+
+// Print Styling
+@media print {
+  // remove underline for links
+  a {
+    text-decoration: none;
+  }
+
+  // show room in program table in regular color
+  .table thead th a {
+    color: #202020;
+  }
+
+  // add grey background to all talk boxes
+  .table td.alert {
+    background-color: #ddd !important;
+  }
 }
