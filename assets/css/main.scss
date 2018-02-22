@@ -132,8 +132,10 @@ tbody tr {
       }
     }
   }
-
   .badge {
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+
     border: 0 none white;
 
     // taken from bootstrap source code
