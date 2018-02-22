@@ -92,8 +92,8 @@ tbody tr {
 // Print Styling
 @media print {
   // remove underline for links
-  a {
-    text-decoration: none;
+  .table a {
+    text-decoration: none !important;
   }
 
   // show room in program table in regular color
@@ -101,8 +101,19 @@ tbody tr {
     color: #202020;
   }
 
-  // add grey background to all talk boxes
+  // overwrite bootstrap default white background
+  // works only with Webkit (Chrome, Safari) and Firefox
   .table td.alert {
-    background-color: #ddd !important;
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+
+    // taken from bootstrap source code
+    //   _alert.scss L47
+    @each $color-name, $value in $theme-colors {
+      &.alert-#{$color-name} {
+        $bg-color: theme-color-level($color-name, $alert-bg-level);
+        background-color: $bg-color !important;
+      }
+    }
   }
 }
