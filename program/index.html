@@ -165,10 +165,8 @@ title: Programm
 
   {% if site.main_categories.size > 0 %}
     &nbsp;
-
-    <!-- show color legend (web only) -->
-    <h5 class="d-print-none">Legende</h5>
-    <p class="d-print-none">
+    <h5>Legende</h5>
+    <p>
       {% for main_cat in site.main_categories %}
         <span class="badge badge-{{ main_cat.color }}">{{ main_cat.name }}</span>
       {% endfor %}

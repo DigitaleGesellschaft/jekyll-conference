@@ -132,4 +132,16 @@ tbody tr {
       }
     }
   }
+
+  .badge {
+    border: 0 none white;
+
+    // taken from bootstrap source code
+    //   _badge.scss L43
+    @each $color-name, $value in $theme-colors {
+      .badge-#{$color-name} {
+        background-color: $value !important;
+      }
+    }
+  }
 }
