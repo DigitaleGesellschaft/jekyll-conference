@@ -148,10 +148,6 @@ title: Programm
                     <strong>{% include show_talk.html %}</strong>
                     <br />
 
-                    <!-- add main category tag only for print -->
-                    <span class="badge badge-{{ main_cat_color }} d-none d-print-inline-block">{{ main_cat }}</span>
-
-                    <!-- remaining categories as tags -->
                     {% include list_sub_categories.html %}
                     {% if has_sub_categories %}
                       <br />
