@@ -48,18 +48,6 @@ title: Programm
 {% assign total_duration_min = end_hour | minus: start_hour | times: 60 | minus: start_min | plus: end_min %}
 {% assign nbr_steps = total_duration_min | divided_by: site.time_steps %}
 
-{% assign talk_start_times = "" %}
-{% for r in site.data.program %}
-  {% for t in r.talks %}
-    {% unless talk_start_times contains t.time_start %}
-      {% unless talk_start_times == "" %}
-        {% assign talk_start_times = talk_start_times | append: "," %}
-      {% endunless %}
-      {% assign talk_start_times = talk_start_times | append: t.time_start %}
-    {% endunless %}
-  {% endfor %}
-{% endfor %}
-
 
   <h1>{{ page.title }}</h1>
 
@@ -97,9 +85,9 @@ title: Programm
               <th scope="row">
                 {{ current_time }}
               </th>
-            {% elsif talk_start_times contains current_time and site.show_starttime %}
+            {% elsif site.show_alltimes %}
               <th scope="row" class="text-muted">
-                {{ current_time }}
+                <span>{{ current_hour }}</span>:{{ current_min }}
               </th>
             {% else %}
               <th scope="row"></th>

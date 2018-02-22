@@ -46,6 +46,22 @@ tbody tr {
   height: 3rem;
 }
 
+// time row
+.table tbody th {
+  // move time closer to grid
+  padding-top: .1rem;
+
+  // smaller font-size for intermediate times
+  &.text-muted {
+    font-size: 0.8rem;
+  }
+
+  // hide hours for intermediate times
+  & > span {
+    visibility: hidden;
+  }
+}
+
 // talk box styling
 .alert {
   border-radius: 0.8rem;
