@@ -39,6 +39,20 @@
 
   {{ content }}
 
+  {% if talk.links %}
+    &nbsp;
+    <h5>Weiterführende Informationen:</h5>
+    <p>
+      <ul>
+        {% for link in talk.links %}
+          <li>
+            {% include get_link.html %}
+          </li>
+        {% endfor %}
+      </ul>
+    </p>
+  {% endif %}
+
   &nbsp;
   <p class="d-print-none">
     <a href="{{ site.baseurl }}{% link talks/index.html %}">zurück zur Übersicht</a>
