@@ -1,5 +1,3 @@
-/* from https://tympanus.net/codrops/2014/01/09/sticky-table-headers-columns/ */
-
 $(function(){
 	$('table').each(function() {
 		if($(this).find('thead').length > 0 && $(this).find('th').length > 0) {
