@@ -3,7 +3,7 @@
 $(function(){
 	$('table').each(function() {
 		if($(this).find('thead').length > 0 && $(this).find('th').length > 0) {
-			// Clone <thead>
+			// Clone table elements
 			var $w	   = $(window),
 				$t	   = $(this),
 				$thead = $t.find('thead').clone(),
@@ -20,11 +20,11 @@ $(function(){
 			if($t.hasClass('overflow-y')) $t.removeClass('overflow-y').parent().addClass('overflow-y');
 
 			// Create new sticky table head (basic)
-			$t.after('<table class="sticky-thead table table-bordered" />');
+			$t.after('<table class="sticky-thead" />');
 
 			// If <tbody> contains <th>, then we create sticky column and intersect (advanced)
 			if($t.find('tbody th').length > 0) {
-				$t.after('<table class="sticky-col table table-bordered" /><table class="sticky-intersect table table-bordered" />');
+				$t.after('<table class="sticky-col" /><table class="sticky-intersect" />');
 			}
 
 			// Create shorthand for things
@@ -32,6 +32,11 @@ $(function(){
 				$stickyCol   = $(this).siblings('.sticky-col'),
 				$stickyInsct = $(this).siblings('.sticky-intersect'),
 				$stickyWrap  = $(this).parent('.sticky-wrap');
+
+			// Clone table styles
+			$stickyHead.addClass($t.attr("class")).removeClass("sticky-enabled");
+			$stickyCol.addClass($t.attr("class")).removeClass("sticky-enabled");
+			$stickyInsct.addClass($t.attr("class")).removeClass("sticky-enabled");
 
 			$stickyHead.append($thead);
 
