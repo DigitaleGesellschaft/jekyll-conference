@@ -13,6 +13,7 @@ sass:
 exclude:
   - README.md
   - LICENSE.md
+  - REDISTRIBUTED.md
   - Gemfile
   - Gemfile.lock
 
