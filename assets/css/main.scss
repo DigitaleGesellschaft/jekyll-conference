@@ -23,6 +23,11 @@
 .table thead th:not(:first-of-type) {
   width: calc(100% / 3 - 4rem);
 }
+@media not all and (min-resolution:.001dpcm) {
+  .table thead th:not(:first-of-type) {
+    width: auto;
+  }
+}
 .table thead th:first-of-type {
   width: 4rem;
 }
