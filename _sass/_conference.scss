@@ -19,11 +19,11 @@ $prgm_cols_min_width: 150px !default;
   table-layout: fixed;
 
   &:not(.sticky-col):not(.sticky-intersect) {
-    min-width: calc($prgm_nbr_cols * $prgm_cols_min_width + $prgm_first_col_width);
+    min-width: calc(#{$prgm_nbr_cols} * #{$prgm_cols_min_width} + #{$prgm_first_col_width});
   }
 }
 .table thead th:not(:first-of-type) {
-  width: calc(100% / $prgm_nbr_cols - $prgm_first_col_width);
+  width: calc(100% / #{$prgm_nbr_cols} - #{$prgm_first_col_width});
 }
 @media not all and (min-resolution:.001dpcm) {
   .table thead th:not(:first-of-type) {
