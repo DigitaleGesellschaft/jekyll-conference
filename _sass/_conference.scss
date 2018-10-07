@@ -8,6 +8,18 @@
   margin-bottom: 0;
 }
 
+// line bbreaks only active on small screens
+@include media-breakpoint-up(lg) {
+  .br-md {
+    display: none;
+  }
+}
+@include media-breakpoint-up(md) {
+  .br-sm {
+    display: none;
+  }
+}
+
 
 // Program Styling
 
