@@ -1,4 +1,6 @@
 ---
 ---
 
+$prgm_nbr_cols: {{ site.data.program | size }};
+
 @import "conference";
