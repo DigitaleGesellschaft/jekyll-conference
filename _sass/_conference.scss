@@ -91,6 +91,8 @@ $prgm-cols-width: 150px !default;
 
 // talk box styling
 .alert {
+  overflow-x: hidden;
+
   border-radius: 0.8rem;
 
   *, a {
