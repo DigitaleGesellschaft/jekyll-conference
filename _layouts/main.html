@@ -16,9 +16,9 @@
       {{ content }}
     </p>
 
-    {% if main_links.size > 0 %}
+    {% if site.main_links.size > 0 %}
       <p class="lead">
-      {% for link in main_links %}
+      {% for link in site.main_links %}
         {% if link.disabled %}
           <a class="btn btn-primary btn-lg disabled" href="#">
             {{ link.name }}

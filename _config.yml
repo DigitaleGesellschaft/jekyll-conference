@@ -72,7 +72,7 @@ main_links:
     relative_url: /program/
   - name: How to get there
     relative_url: /location/
-  - main_name: Tickets
+  - name: Tickets
     disabled: true
     absolute_url: 'https://github.com'
 
