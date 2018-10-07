@@ -48,19 +48,17 @@ defaults:
 
 # Custom settings
 navigation:
-  - navbar_name: Program
-    main_name: Program
+  - name: Program
     relative_url: /program/
-  - navbar_name: Talks
+  - name: Talks
     relative_url: /talks/
-  - navbar_name: Speakers
+  - name: Speakers
     relative_url: /speakers/
-  - navbar_name: Location
-    main_name: How to get there
+  - name: Location
     relative_url: /location/
-  - navbar_name: About
+  - name: About
     relative_url: /about/
-  - navbar_name: Previous Editions
+  - name: Previous Editions
     menu:
       - name: 2018 (current)
         disabled: true
@@ -68,6 +66,12 @@ navigation:
         relative_url: /2017/
       - name: 2016
         relative_url: /2016/
+
+main_links:
+  - name: Program
+    relative_url: /program/
+  - name: How to get there
+    relative_url: /location/
   - main_name: Tickets
     disabled: true
     absolute_url: 'https://github.com'
