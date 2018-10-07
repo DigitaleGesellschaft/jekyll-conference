@@ -1,6 +1,6 @@
 ---
 ---
 
-$prgm_nbr_cols: {{ site.data.program | size }};
+$prgm-cols-nbr: {{ site.data.program | size }};
 
 @import "conference";

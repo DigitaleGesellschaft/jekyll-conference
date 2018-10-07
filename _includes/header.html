@@ -50,6 +50,6 @@
 
   </header>
   &nbsp;
-  <main class="container">
+  <main class="container{% if page.url contains "program" %} container-program{% endif %}">
 
     {% include info_bar.html %}
