@@ -8,9 +8,9 @@
   {% endif %}
 
   {% if speaker.hide %}
-    {{ speaker_short }}<!--
+    <em>{{ speaker_short }}</em><!--
   {% else %}
-    <a href="{{ speaker.url | prepend: site.baseurl }}">{{ speaker_short }}</a><!--
+    <em><a href="{{ speaker.url | prepend: site.baseurl }}">{{ speaker_short }}</a></em><!--
   {% endif %}
   {% if forloop.last != true %}
     -->,
