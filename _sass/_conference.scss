@@ -125,7 +125,7 @@ $prgm-cols-width: 150px !default;
   width: 100%; /* Force stretch */
 }
 .sticky-wrap .sticky-intersect {
-  opacity: 1;
+  opacity: 0;
   z-index: 150;
 }
 .sticky-wrap .sticky-intersect th {
