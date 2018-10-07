@@ -44,11 +44,11 @@ The site's configuration is given by the `_config.yaml` file. There one can edit
 - `main_links` defines links shown on the main landing page in form of buttons. Each link consists of
   * the text to show (`name`),
   * a relative (`relative_url`) or absolute link address (`absolute_url`), and
-  * optionally if it is disabled (`disabled`).
-- an optional `info_bar` which if active is shown as text in a dismissible box below the navigation bar. Consists of
+  * optionally if it is disabled (`disabled: true`).
+- `info_bars` defines optional dismissible boxes below the navigation bar. Consists of
   * a `title` (optional),
   * a `color`, given as a (Bootstrap) class name,
-  * the option to show the box only on the main page (`main_only: true`), and
+  * the option to show the box only on the main page (`main_only: true`) or the other pages (`pages_only: true`), and
   * a `text` to be shown.
 - the conference `main_categories` which is used to sort talks, each main category consists of a `name` and a `color` given as a (Bootstrap) class name
 - `time_steps` sets the grid space for the program table in minutes, and
