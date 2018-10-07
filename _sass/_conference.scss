@@ -13,9 +13,10 @@
 
 $prgm-first-col-width: 4rem !default;
 $prgm-cols-width: 150px !default;
+$prgm-breakpoint-down: sm !default;
 
 // minimum table container width
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down($prgm-breakpoint-down) {
   .page-program .container {
     max-width: calc(#{$prgm-cols-nbr} * #{$prgm-cols-width} + #{$prgm-first-col-width} + #{$grid-gutter-width});
   }
