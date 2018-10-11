@@ -46,7 +46,7 @@ defaults:
     values:
       layout: location
 
-# Custom settings
+# Navigation bar
 navigation:
   - name: Program
     relative_url: /program/
@@ -67,6 +67,7 @@ navigation:
       - name: 2016
         relative_url: /2016/
 
+# Main landing page links
 main_links:
   - name: Program
     relative_url: /program/
@@ -76,6 +77,7 @@ main_links:
     disabled: true
     absolute_url: 'https://github.com'
 
+# Information boxes
 info_bars:
   - title: Important Information
     color: primary
@@ -90,12 +92,14 @@ info_bars:
     color: warning
     pages_only: true
 
+# Talk categories
 main_categories:
   - name: Cat A
     color: primary
   - name: Cat B
     color: success
 
+# Program table settings
 time_steps: 15 # in minutes
 show_firstname: true
 show_alltimes: true
