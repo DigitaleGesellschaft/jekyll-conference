@@ -16,6 +16,7 @@ exclude:
   - REDISTRIBUTED.md
   - Gemfile
   - Gemfile.lock
+  - create_entries.py
 
 # Collections and their defaults
 collections:
