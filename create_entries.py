@@ -71,8 +71,8 @@ def create_files(content, folder_name,
         os.makedirs(folder_name)
 
     for entry in content:
-        file_name = transform_title(entry[file_name]) + '.md'
-        file_path = os.path.join(folder_name, file_name)
+        file = transform_title(entry[file_name]) + '.md'
+        file_path = os.path.join(folder_name, file)
 
         file_data = {}
         for file_var in file_vars:
@@ -80,6 +80,7 @@ def create_files(content, folder_name,
                 file_data[file_var] = entry[file_var]
 
         with open(file_path, 'w', encoding='utf-8') as f:
+            f.write('---\n')
             yaml.dump(file_data, f,
                       encoding='utf-8', allow_unicode=True,
                       default_flow_style=False)
