@@ -12,7 +12,7 @@ def transform_title(string):
     new_string = string.replace(' ', '_')
 
     # replace special characters (:, /, ...)
-    new_string = re.sub(r'(?u)[^-\w.]', '', new_string)
+    new_string = re.sub(r'(?u)[^-\w]', '', new_string)
 
     # remove URL unsafe characters (ä, ö, ü, é, è, à, ...)
     new_string = normalize(
@@ -22,6 +22,13 @@ def transform_title(string):
     new_string = new_string.lower()
 
     return new_string
+
+
+def escape_markdown(text)
+    # escape pipes
+    new_text = text.replace('|', '\|')
+
+    return new_text
 
 
 def parse_csv(file_path):
@@ -81,22 +88,31 @@ def create_files(content, folder_name,
         os.makedirs(folder_name)
 
     for entry in content:
+        # create file title
         file = transform_title(entry[file_name]) + '.md'
         file_path = os.path.join(folder_name, file)
 
+        # create arrays of variables to show in header of file
         file_data = {}
         for file_var in file_vars:
             if file_var in entry:
                 file_data[file_var] = entry[file_var]
 
+        # write to file
         with open(file_path, 'w', encoding='utf-8') as f:
+            # Write Header
             f.write('---\n')
             yaml.dump(file_data, f,
                       encoding='utf-8', allow_unicode=True,
                       default_flow_style=False)
             f.write('---\n')
+
+            # Write Body
             if file_content in entry:
-                f.write(entry[file_content])
+                # escape markdown text
+                text = escape_markdown(entry[file_content])
+
+                f.write(text)
 
 
 default_list_structure = {
