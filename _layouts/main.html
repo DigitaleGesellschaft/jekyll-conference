@@ -6,15 +6,13 @@
     </h1>
     {% if site.description != none %}
       <p class="lead">
-        {{ site.description | markdownify }}
+        {{ site.description | markdownify | replace: '<p>', '<p class="lead">' }}
       </p>
     {% endif %}
 
     <hr class="my-4">
 
-    <p>
-      {{ content }}
-    </p>
+    {{ content }}
 
     {% if site.main_links.size > 0 %}
       <p class="lead">

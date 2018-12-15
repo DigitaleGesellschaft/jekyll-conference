@@ -50,15 +50,13 @@
     &nbsp;
     <!-- language -->
     <h5>More information:</h5>
-    <p>
-      <ul>
-        {% for link in talk.links %}
-          <li>
-            {% include get_link.html %}
-          </li>
-        {% endfor %}
-      </ul>
-    </p>
+    <ul>
+      {% for link in talk.links %}
+        <li>
+          {% include get_link.html %}
+        </li>
+      {% endfor %}
+    </ul>
   {% endif %}
 
   &nbsp;

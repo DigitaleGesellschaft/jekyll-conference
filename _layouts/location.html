@@ -16,22 +16,20 @@
   <!-- language -->
   <h1 class="d-print-none">Location</h1>
 
-  <p>
-    <ul class="nav nav-pills d-print-none">
+  <ul class="nav nav-pills d-print-none">
+    <li class="nav-item">
+      <a class="nav-link {% if page.name contains 'index' %}active{% endif %}" href="{{ site.baseurl }}{% link location/index.md %}">Plan</a>
+    </li>
+    {% for r in site.location %}
       <li class="nav-item">
-        <a class="nav-link {% if page.name contains 'index' %}active{% endif %}" href="{{ site.baseurl }}{% link location/index.md %}">Plan</a>
+        {% if r.hide %}
+          <span class="nav-item nav-link disabled">{{ r.name }}</span>
+        {% else %}
+          <a class="nav-link {% if room.name == r.name %}active{% endif %}" href="{{ r.url | prepend: site.baseurl }}">{{ r.name }}</a>
+        {% endif %}
       </li>
-      {% for r in site.location %}
-        <li class="nav-item">
-          {% if r.hide %}
-            <span class="nav-item nav-link disabled">{{ r.name }}</span>
-          {% else %}
-            <a class="nav-link {% if room.name == r.name %}active{% endif %}" href="{{ r.url | prepend: site.baseurl }}">{{ r.name }}</a>
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  </p>
+    {% endfor %}
+  </ul>
 
   {{ content }}
 
@@ -39,36 +37,34 @@
     &nbsp;
     <!-- language -->
     <h5>Talks in this room:</h5>
-    <p>
-      <ul>
-        {% for r in site.data.program %}
-          {% if r.room == room.name %}
-            {% if r.talks.size > 0 %}
-              {% for t in r.talks %}
-                {% assign talk = site.talks | where: 'name', t.name | first %}
+    <ul>
+      {% for r in site.data.program %}
+        {% if r.room == room.name %}
+          {% if r.talks.size > 0 %}
+            {% for t in r.talks %}
+              {% assign talk = site.talks | where: 'name', t.name | first %}
 
-                <li>
-                  {% include get_talk_time.html %}
-                  {% include show_talk_time.html %}
-
-                  {% include show_talk.html %}
-                </li>
-
-              {% endfor %}
-
-            {% else %}
               <li>
-                <!-- language -->
-                <em>no talks planned</em>
+                {% include get_talk_time.html %}
+                {% include show_talk_time.html %}
+
+                {% include show_talk.html %}
               </li>
-            {% endif %}
 
-            {% break %}
+            {% endfor %}
+
+          {% else %}
+            <li>
+              <!-- language -->
+              <em>no talks planned</em>
+            </li>
           {% endif %}
-        {% endfor %}
 
-      </ul>
-    </p>
+          {% break %}
+        {% endif %}
+      {% endfor %}
+
+    </ul>
     {% endunless %}
 
 {% include footer.html %}
