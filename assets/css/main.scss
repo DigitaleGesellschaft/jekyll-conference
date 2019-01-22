@@ -4,3 +4,9 @@
 $prgm-cols-nbr: {{ site.data.program | size }};
 
 @import "conference";
+
+// Map Styling
+#map {
+  height: 60vh;
+  width: 100%;
+}

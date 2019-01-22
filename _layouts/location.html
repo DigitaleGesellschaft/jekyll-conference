@@ -52,7 +52,9 @@
 
   {{ content }}
 
-  {% unless page.name contains 'index' %}
+  {% if page.name contains 'index' %}
+    <div id="map"></div>
+  {% else %}
     &nbsp;
     <!-- language -->
     <h5>Talks in this room:</h5>
@@ -86,6 +88,6 @@
       {% endunless %}
 
     </ul>
-    {% endunless %}
+    {% endif %}
 
 {% include footer.html %}
