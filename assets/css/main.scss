@@ -8,5 +8,6 @@ $prgm-cols-nbr: {{ site.data.program | size }};
 // Map Styling
 #map {
   height: 60vh;
+  min-height: 400px;
   width: 100%;
 }
