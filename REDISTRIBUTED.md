@@ -14,6 +14,10 @@ This project re-distributes the following third-party software. We have decided 
     Copyright (C) 2011-2017 The Bootstrap Authors (https://github.com/twbs/bootstrap/graphs/contributors).
     [MIT License](https://github.com/twbs/bootstrap/blob/master/LICENSE)
 
+ - [Font Awesome](https://fontawesome.com/)
+
+    [Font Awesome Free License](https://fontawesome.com/license/free)
+
  - [jQuery](https://jquery.com)
 
     Copyright (C) JS Foundation and other contributors, https://js.foundation/.
@@ -29,6 +33,11 @@ This project re-distributes the following third-party software. We have decided 
 
     Copyright (c) 2013 Leaflet Providers contributors. All rights reserved.
     [BSD 2-Clause "Simplified" License](https://github.com/leaflet-extras/leaflet-providers/blob/master/license.md)
+
+ - [Leaflet.Locate](https://www.domoritz.de/leaflet-locatecontrol/demo/)
+
+    Copyright (c) 2014 Dominik Moritz.
+    [MIT License](https://github.com/domoritz/leaflet-locatecontrol/blob/gh-pages/LICENSE)
 
  - [Popper.js](https://popper.js.org)
 
