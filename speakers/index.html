@@ -7,7 +7,7 @@ title: Speakers
 
 <div class="div-speakerlist">
   {% assign cur_letter = false %}
-  {% assign speakers = site.speakers | sort: 'last_name' %}
+  {% assign speakers = site.speakers | sort_natural: 'last_name' %}
   {% for speaker in speakers %}
 
     {% assign last_letter = speaker.last_name | slice: 0 | capitalize %}
