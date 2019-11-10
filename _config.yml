@@ -11,6 +11,7 @@ sass:
 
 # Exclude from processing
 exclude:
+  - vendor
   - README.md
   - LICENSE.md
   - REDISTRIBUTED.md
