@@ -24,7 +24,7 @@ def transform_title(string):
     return new_string
 
 
-def escape_markdown(text)
+def escape_markdown(text):
     # escape pipes
     new_text = text.replace('|', '\|')
 
