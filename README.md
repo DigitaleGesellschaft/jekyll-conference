@@ -1,6 +1,12 @@
 
 # jekyll-conference
 
+> :warning: This repository is **not maintained anymore** and read-only. :warning:
+>
+> Have a look at v2 implemented as a Jekyll Theme (Gem) here instead:
+> 
+> - [DigitaleGesellschaft/jekyll-theme-conference](https://github.com/DigitaleGesellschaft/jekyll-theme-conference)
+
 This is a [Jekyll](http://jekyllrb.com) template based on [Bootstrap 4](http://getbootstrap.com) which can be used to make a simple website for a one-day conference or workshop containing:
 
 - program / schedule
